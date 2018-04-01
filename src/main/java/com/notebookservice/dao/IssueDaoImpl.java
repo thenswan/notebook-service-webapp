@@ -10,17 +10,22 @@ import java.util.List;
 @Repository
 public class IssueDaoImpl implements IssueDao {
 
+    private final SessionFactory sessionFactory;
+
     @Autowired
-    private SessionFactory sessionFactory;
+    public IssueDaoImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     public void addIssue(Issue Issue) {
         sessionFactory.getCurrentSession().save(Issue);
     }
 
+    @SuppressWarnings({"JpaQlInspection", "unchecked"})
     @Override
     public List<Issue> getAllIssues() {
-        return sessionFactory.getCurrentSession().createQuery("from Issue")
+        return sessionFactory.getCurrentSession().createQuery("FROM Issue")
                 .list();
     }
 
@@ -46,10 +51,8 @@ public class IssueDaoImpl implements IssueDao {
     }
 
     @Override
-    public List<Issue> getAllIssuesByManuf(String name) {
+    public List<Issue> getAllIssuesByManufacturer(String name) {
         return null;
     }
-
-
 
 }

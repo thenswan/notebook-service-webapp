@@ -9,7 +9,6 @@ import org.springframework.validation.Validator;
 @Component
 public class IssueValidator implements Validator {
 
-
     @Override
     public boolean supports(Class<?> aClass) {
         return Issue.class.equals(aClass);
@@ -24,10 +23,9 @@ public class IssueValidator implements Validator {
             errors.rejectValue("Name", "Size.issueForm.Name");
         }
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "Discription", "Required");
-        if (issue.getDiscription().length() < 8 || issue.getDiscription().length() > 32) {
-            errors.rejectValue("Discription", "Size.issueForm.Discription");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "Description", "Required");
+        if (issue.getDescription().length() < 8 || issue.getDescription().length() > 32) {
+            errors.rejectValue("Description", "Size.issueForm.Description");
         }
-
     }
 }

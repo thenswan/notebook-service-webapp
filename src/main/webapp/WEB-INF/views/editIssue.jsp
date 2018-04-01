@@ -1,11 +1,4 @@
 <%@ taglib prefix="c" uri="http://www.springframework.org/tags/form" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: admin
-  Date: 24.03.2018
-  Time: 15:46
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -22,7 +15,7 @@
             <span>Issue Name</span><c:input path="name"></c:input>
         </label>
         <label for="field2">
-            <span>Issue Description</span><c:input path="discription"></c:input>
+            <span>Issue Description</span><c:input path="description"></c:input>
         </label>
         <label for="field3">
             <span>Issue Status</span> <c:input path="fixed"></c:input>
@@ -31,8 +24,6 @@
             <span>&nbsp;</span><input type="submit" value="Save" />
         </label>
     </c:form>
-
 </div>
-
 </body>
 </html>

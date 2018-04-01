@@ -1,7 +1,7 @@
 package com.notebookservice.service;
 
 import com.notebookservice.dao.DeviceDao;
-import com.notebookservice.model.AbstractModels.Device;
+import com.notebookservice.model.Device;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,46 +10,49 @@ import java.util.List;
 
 @Service
 @Transactional
-public class DeviceServiceImpl implements DeviceService{
+public class DeviceServiceImpl implements DeviceService {
+
+    private DeviceDao deviceDao;
 
     @Autowired
-    private com.notebookservice.dao.DeviceDao DeviceDao;
+    public DeviceServiceImpl(DeviceDao DeviceDao) {
+        this.deviceDao = DeviceDao;
+    }
 
     @Override
     @Transactional
-    public void addDevice(Device Device) {
-        DeviceDao.addDevice(Device);
+    public void addDevice(Device device) {
+        deviceDao.addDevice(device);
     }
 
     @Override
     @Transactional
     public List<Device> getAllDevices() {
-        return DeviceDao.getAllDevices();
+        return deviceDao.getAllDevices();
     }
 
     @Override
     @Transactional
-    public void deleteDevice(Long DeviceId) {
-        DeviceDao.deleteDevice(DeviceId);
+    public void deleteDevice(Long deviceId) {
+        deviceDao.deleteDevice(deviceId);
     }
 
-    public Device getDevice(Long empid) {
-        return DeviceDao.getDevice(empid);
+    public Device getDevice(Long deviceId) {
+        return deviceDao.getDevice(deviceId);
     }
 
     @Transactional
-    public List<Device> getDeviceByUser(String name){
-        return DeviceDao.getAllDevicesByUsers(name);
+    public List<Device> getDeviceByUser(String name) {
+        return deviceDao.getAllDevicesByUsers(name);
     }
+
     @Transactional
     public Device updateDevice(Device Device) {
-
-        return DeviceDao.updateDevice(Device);
+        return deviceDao.updateDevice(Device);
     }
 
-    public void setDeviceDAO(DeviceDao DeviceDAO) {
-        this.DeviceDao = DeviceDAO;
+    public void setDeviceDAO(DeviceDao deviceDao) {
+        this.deviceDao = deviceDao;
     }
-
 
 }

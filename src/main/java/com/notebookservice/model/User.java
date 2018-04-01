@@ -1,17 +1,8 @@
 package com.notebookservice.model;
 
-import com.notebookservice.model.AbstractModels.Device;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
-
-/**
- * Simple JavaBean domain object that represents a User.
- *
- * @author Eugene Suleimanov
- * @version 1.0
- */
 
 @Entity
 @Table(name = "users")
@@ -27,11 +18,9 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @ElementCollection(targetClass=Device.class)
-    @OneToMany(targetEntity=Device.class, mappedBy="user", fetch=FetchType.EAGER)
-    private Set<Device> Devices = new HashSet<Device>();
-
-
+    @ElementCollection(targetClass = Device.class)
+    @OneToMany(targetEntity = Device.class, mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<Device> Devices = new HashSet<>();
 
     @Transient
     private String confirmPassword;
@@ -81,8 +70,6 @@ public class User {
         this.roles = roles;
     }
 
-
-
     public Set<Device> getDevices() {
         return Devices;
     }
@@ -91,9 +78,21 @@ public class User {
         Devices = devices;
     }
 
-    public void addDevice(Device device){
+    public void addDevice(Device device) {
         device.setUser(this);
         this.Devices.add(device);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", Devices=" + Devices +
+                ", confirmPassword='" + confirmPassword + '\'' +
+                ", roles=" + roles +
+                '}';
     }
 
 }

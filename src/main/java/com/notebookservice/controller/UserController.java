@@ -1,6 +1,6 @@
 package com.notebookservice.controller;
 
-import com.notebookservice.model.AbstractModels.Device;
+import com.notebookservice.model.Device;
 import com.notebookservice.model.Issue;
 import com.notebookservice.model.Notebook;
 import com.notebookservice.model.User;
@@ -39,10 +39,11 @@ public class UserController {
     @Autowired
     private UserValidator userValidator;
 
+    private String username = "";
+
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
         model.addAttribute("userForm", new User());
-
         return "registration";
     }
 
@@ -83,21 +84,17 @@ public class UserController {
 
     @RequestMapping(value = "/deviceInfo", method = RequestMethod.POST)
     public String addIssue(@RequestParam(value = "did") Integer id, @ModelAttribute("issue") Issue issue) {
-
         issue.setDevice(deviceService.getDevice(id.longValue()));
         issue.setFixed(false);
 
         issueService.addIssue(issue);
-       // modelAndView.setViewName("/deviceInfo/"+device.getDeviceId());
-
         return ("redirect:/deviceInfo/"+id+"");
     }
 
     @RequestMapping(value = "/welcome", method = RequestMethod.POST)
     public String addDevice(Model model, HttpServletRequest request, @ModelAttribute("newd") Notebook notebook) {
-
         Set<Issue> issueSet = new HashSet<>();
-       notebook.setIssues(issueSet);
+       notebook.setIssueHashSet(issueSet);
        notebook.setType("Notebook");
         User user1 = userService.findByUsername(request.getUserPrincipal().getName());
         user1.addDevice(notebook);
@@ -109,18 +106,15 @@ public class UserController {
     @RequestMapping(value = "/editIssue/{id}", method = RequestMethod.GET)
     public String editPerson(@PathVariable("id") Integer id, Model model){
         model.addAttribute("issue", issueService.getIssue(id.longValue()));
-        //return "deviceInfo?id=2";
         return "/editIssue";
     }
 
     @RequestMapping(value = "/editIssue", method = RequestMethod.POST)
     @ResponseBody
     public ModelAndView saveIssue(@ModelAttribute("issue") Issue issue, ModelAndView model) {
-
         issue.setDevice(issueService.getIssue(issue.getIssueId()).getDevice());
         issueService.updateIssue(issue);
 
-        //model.addObject("listDevices", deviceService.getAllDevices());
         model.setViewName("redirect:/welcome");
         return model;
     }
@@ -128,7 +122,7 @@ public class UserController {
 
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
     public ModelAndView welcome(ModelAndView model, HttpServletRequest request) {
-        List<Device> deviceList = new ArrayList<>();
+        List<Device> deviceList;
         username=request.getUserPrincipal().getName();
         if(request.getUserPrincipal().getName().equalsIgnoreCase("admin123")) {
             deviceList = deviceService.getAllDevices();
@@ -138,11 +132,9 @@ public class UserController {
             deviceList = deviceService.getDeviceByUser(request.getUserPrincipal().getName());
         }
         model.addObject("listDevices", deviceList);
-        model.addObject("listManuf", statistics());
-        model.addObject("newd", new Notebook());
+        model.addObject("listManufacturer", statistics());
+        model.addObject("NewDevice", new Notebook());
         model.setViewName("welcome");
-
-
 
         return model;
     }
@@ -159,36 +151,30 @@ public class UserController {
         return "redirect:/welcome";
     }
 
-
-
-
-    String username = new String();
-    public Map statistics(){
+    private Map statistics(){
         Map map = new Hashtable();
         User user = userService.findByUsername(username);
         System.out.println(username);
         if(!username.contains("admin123")) {
             for (Device d : user.getDevices()) {
-                if (map.containsKey(d.getManufactuer())) {
-                    map.put(d.getManufactuer(), Integer.parseInt(map.get(d.getManufactuer()).toString()) + d.getIssues().size());
+                if (map.containsKey(d.getManufacturer())) {
+                    map.put(d.getManufacturer(), Integer.parseInt(map.get(d.getManufacturer()).toString()) + d.getIssueHashSet().size());
                 } else {
-                    map.put(d.getManufactuer(), d.getIssues().size());
+                    map.put(d.getManufacturer(), d.getIssueHashSet().size());
                 }
             }
         }
         else{
             for (Device d : deviceService.getAllDevices()) {
-                if (map.containsKey(d.getManufactuer())) {
-                    map.put(d.getManufactuer(), Integer.parseInt(map.get(d.getManufactuer()).toString()) + d.getIssues().size());
+                if (map.containsKey(d.getManufacturer())) {
+                    map.put(d.getManufacturer(), Integer.parseInt(map.get(d.getManufacturer()).toString()) + d.getIssueHashSet().size());
                 } else {
-                    map.put(d.getManufactuer(), d.getIssues().size());
+                    map.put(d.getManufacturer(), d.getIssueHashSet().size());
                 }
             }
         }
         System.out.println(map.toString());
         return map;
     }
-
-
 
 }

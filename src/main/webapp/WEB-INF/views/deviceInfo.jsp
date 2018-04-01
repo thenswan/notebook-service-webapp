@@ -2,15 +2,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-
-<%--
-  Created by IntelliJ IDEA.
-  User: admin
-  Date: 25.02.2018
-  Time: 18:27
-  To change this template use File | Settings | File Templates.
---%>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <intercept-url pattern="/deviceInfo.jsp" access="hasRole('ANONYMOUS')" />
@@ -26,10 +17,10 @@
 <div class="container">
     <div class="row-flex">
         <div class="col-flex">
-            <div class=""><label><i class="fa fa-user"></i>Manufactuer :</label>  <span>${device.manufactuer}</span></div>
+            <div class=""><label><i class="fa fa-user"></i>Manufacturer :</label>  <span>${device.manufacturer}</span></div>
             <div class=""><label><i class="fa fa-user"></i>Model :</label>  <span> ${device.model} </span></div>
             <div class=""><label><i class="fa fa-calendar"></i>Type :</label>  <span>${device.type}</span></div>
-            <div class=""><label><i class="fa fa-male"></i>Issues count :</label>  <span>${device.issues.size()}</span></div>
+            <div class=""><label><i class="fa fa-male"></i>Issues count :</label>  <span>${device.issueHashSet.size()}</span></div>
 
         </div>
 
@@ -52,8 +43,8 @@
 
                     <label>Description:</label>
                     <spring:bind path="discription">
-                    <form:input path="discription" placeholder="Description" required="true"></form:input>
-                        <form:errors path="discription"></form:errors>
+                    <form:input path="description" placeholder="Description" required="true"></form:input>
+                        <form:errors path="description"></form:errors>
                     </spring:bind>
 
 
@@ -64,7 +55,7 @@
     </div>
 
         <div class="form-style-8">
-            <c:forEach var="issue" items="${device.issues}">
+            <c:forEach var="issue" items="${device.issueHashSet}">
                 <h3>Issue ${issue.issueId}</h3>
             <div class="row-flex">
                 <label>Name</label>
@@ -72,8 +63,8 @@
             </div>
 
             <div class="row-flex">
-                <label>Discription</label>
-                <input type="text" id="discription" value="${issue.discription}" disabled="disabled"/>
+                <label>Description</label>
+                <input type="text" id="discription" value="${issue.description}" disabled="disabled"/>
             </div>
 
             <div class="row-flex">

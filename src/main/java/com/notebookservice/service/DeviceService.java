@@ -1,6 +1,6 @@
 package com.notebookservice.service;
 
-import com.notebookservice.model.AbstractModels.Device;
+import com.notebookservice.model.Device;
 
 import java.util.List;
 

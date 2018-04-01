@@ -13,16 +13,20 @@ import java.util.List;
 @Transactional
 public class IssueServiceImpl implements IssueService{
 
+    private IssueDao issueDao;
 
     @Autowired
-    private IssueDao issueDao;
+    public IssueServiceImpl(IssueDao issueDao) {
+        this.issueDao = issueDao;
+    }
 
     @Override
     @Transactional
-    public void addIssue(Issue Issue) {
-        issueDao.addIssue(Issue);
+    public void addIssue(Issue issue) {
+        issueDao.addIssue(issue);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     @Transactional
     public List<Issue> getAllIssues() {
@@ -31,22 +35,23 @@ public class IssueServiceImpl implements IssueService{
 
     @Override
     @Transactional
-    public void deleteIssue(Long IssueId) {
-        issueDao.deleteIssue(IssueId);
+    public void deleteIssue(Long issueId) {
+        issueDao.deleteIssue(issueId);
     }
 
-    public Issue getIssue(Long empid) {
-        return issueDao.getIssue(empid);
+    public Issue getIssue(Long issueId) {
+        return issueDao.getIssue(issueId);
     }
 
     @Transactional
-    public List<Issue> getIssueByUser(String name){
-        return issueDao.getAllIssuesByManuf(name);
+    public List<Issue> getIssueByUser(String manufacturerName){
+        return issueDao.getAllIssuesByManufacturer(manufacturerName);
     }
+
     @Override
     @Transactional
-    public Issue updateIssue(Issue Issue) {
-        return issueDao.updateIssue(Issue);
+    public Issue updateIssue(Issue issue) {
+        return issueDao.updateIssue(issue);
     }
 
     public void setIssueDAO(IssueDao IssueDAO) {

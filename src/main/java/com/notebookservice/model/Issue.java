@@ -1,39 +1,31 @@
 package com.notebookservice.model;
 
-
-import com.notebookservice.model.AbstractModels.Device;
-
 import javax.persistence.*;
 
-/**
- * Created by admin on 11.12.2017.
- */
 @Entity
 public class Issue {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long issueId;
 
+    private String name = "";
 
-    private String Name = new String();
-    private String Discription = new String();
-    private Boolean Fixed = new Boolean(false);
+    private String description = "";
 
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="deviceId")
+    private Boolean fixed = Boolean.FALSE;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "deviceId")
     private Device device;
-
-
-
 
     public Issue() {
     }
 
-    public Issue(String name, String discription) {
-        Name = name;
-        Discription = discription;
-
+    public Issue(String name, String description) {
+        this.name = name;
+        this.description = description;
     }
 
     public Long getIssueId() {
@@ -44,35 +36,29 @@ public class Issue {
         this.issueId = id;
     }
 
-
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        this.Name = name;
+        this.name = name;
     }
 
-
-
-    public String getDiscription() {
-        return Discription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDiscription(String discription) {
-        this.Discription = discription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-
-
-    public boolean isFixed() {
-        return Fixed;
+    public boolean getFixed() {
+        return fixed;
     }
 
     public void setFixed(boolean fixed) {
-        this.Fixed = fixed;
+        this.fixed = fixed;
     }
-
 
     public Device getDevice() {
         return device;
@@ -81,13 +67,5 @@ public class Issue {
     public void setDevice(Device device) {
         this.device = device;
     }
-
-    //    public Tablet getTablet() {
-//        return tablet;
-//    }
-//
-//    public void setTablet(Tablet device) {
-//        this.tablet = device;
-//    }
 
 }

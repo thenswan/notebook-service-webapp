@@ -73,7 +73,7 @@
             <form:form method="POST" action="/welcome" modelAttribute="newd">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <label>Manufacteur:</label>
-                <form:input path="manufactuer" autofocus="true" placeholder="Manufacteur" required="true"></form:input>
+                <form:input path="manufacturer" autofocus="true" placeholder="Manufacteur" required="true"></form:input>
                 <label>Model:</label>
                 <form:input path="model" placeholder="Model" required="true"></form:input>
                 <label>Code:</label>

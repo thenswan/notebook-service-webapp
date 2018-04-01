@@ -8,7 +8,7 @@ public interface IssueDao {
 
     public void addIssue(Issue Issue);
 
-    public List<Issue> getAllIssues();
+    public List getAllIssues();
 
     public void deleteIssue(Long IssueId);
 
@@ -16,5 +16,5 @@ public interface IssueDao {
 
     public Issue getIssue(Long IssueId);
 
-    public List<Issue> getAllIssuesByManuf(String name);
+    public List<Issue> getAllIssuesByManufacturer(String name);
 }

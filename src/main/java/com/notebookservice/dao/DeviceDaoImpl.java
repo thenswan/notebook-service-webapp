@@ -3,7 +3,7 @@ package com.notebookservice.dao;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import com.notebookservice.model.AbstractModels.Device;
+import com.notebookservice.model.Device;
 
 
 import java.util.List;
@@ -11,42 +11,33 @@ import java.util.List;
 @Repository
 public class DeviceDaoImpl implements DeviceDao {
 
+    private final SessionFactory sessionFactory;
+
     @Autowired
-    private SessionFactory sessionFactory;
+    public DeviceDaoImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     public void addDevice(Device device) {
         sessionFactory.getCurrentSession().saveOrUpdate(device);
-
     }
 
-    @SuppressWarnings("unchecked")
     public List<Device> getAllDevices() {
-
-
-        for(Object o : sessionFactory.getCurrentSession().createQuery("from Device").list()){
-            System.out.println(((Device)o).getModel());
+        //noinspection JpaQlInspection
+        for (Object o : sessionFactory.getCurrentSession().createQuery("FROM Device").list()) {
+            System.out.println(((Device) o).getModel());
         }
-        return sessionFactory.getCurrentSession().createQuery("from Device")
+        //noinspection unchecked,JpaQlInspection
+        return sessionFactory.getCurrentSession().createQuery("FROM Device")
                 .list();
     }
 
-    public List<Device> getAllDevicesByUsers(String name){
-
-
-        System.out.println("/////////////////////////////////////////////");
-        System.out.println("/////////////////////////////////////////////");
-        System.out.println("/////////////////////////////////////////////");
-        System.out.println("/////////////////////////////////////////////");
-        //System.out.println(sessionFactory.getCurrentSession().createQuery("from User WHERE username like '"+ name + "'").list().toString());
-        System.out.println("/////////////////////////////////////////////");
-        System.out.println("/////////////////////////////////////////////");
-        System.out.println("/////////////////////////////////////////////");
-        System.out.println("/////////////////////////////////////////////");
-      //  id = Integer.parseInt(sessionFactory.getCurrentSession().createQuery("User WHERE username like '"+name+"'").toString());
-        //return sessionFactory.getCurrentSession().createQuery(" Device WHERE user =  '"+id+"'").list();
-        return sessionFactory.getCurrentSession().createQuery("select d from Device d JOIN d.user u where u.username like '"+name+"'")
+    @SuppressWarnings({"unchecked", "JpaQlInspection"})
+    public List<Device> getAllDevicesByUsers(String name) {
+        return sessionFactory.getCurrentSession().createQuery("select d from Device d JOIN d.user u where u.username like '" + name + "'")
                 .list();
     }
+
     @Override
     public void deleteDevice(Long deviceId) {
         Device device = (Device) sessionFactory.getCurrentSession().load(
@@ -57,9 +48,9 @@ public class DeviceDaoImpl implements DeviceDao {
 
     }
 
-    public Device getDevice(Long empid) {
+    public Device getDevice(Long deviceId) {
         return (Device) sessionFactory.getCurrentSession().get(
-                Device.class, empid);
+                Device.class, deviceId);
     }
 
     @Override

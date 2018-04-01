@@ -1,18 +1,16 @@
 package com.notebookservice.model;
 
-
-import com.notebookservice.model.AbstractModels.Device;
-
 import javax.persistence.Entity;
 import java.util.Set;
 
 @Entity
 public class Notebook extends Device {
+
     public Notebook() {
     }
 
-    public Notebook(String manufactuer, String model, String type, String code, Set<Issue> issues) {
-        super(manufactuer, model, type, code, issues);
+    public Notebook(String manufacturer, String model, String type, String code, Set<Issue> issues) {
+        super(manufacturer, model, type, code, issues);
     }
 
     @Override
@@ -25,24 +23,18 @@ public class Notebook extends Device {
         super.setDeviceId(id);
     }
 
-    @Override
-    public String getManufactuer() {
-        return super.getManufactuer();
+    public String getManufacturer() {
+        return super.getManufacturer();
     }
 
-
-
-    @Override
-    public void setManufactuer(String manufactuer) {
-        super.setManufactuer(manufactuer);
+    public void setManufacturer(String manufacturer) {
+        super.setManufacturer(manufacturer);
     }
 
     @Override
     public String getModel() {
         return super.getModel();
     }
-
-
 
     @Override
     public void setModel(String model) {
@@ -54,8 +46,6 @@ public class Notebook extends Device {
         return super.getType();
     }
 
-
-
     @Override
     public void setType(String type) {
         super.setType(type);
@@ -66,19 +56,18 @@ public class Notebook extends Device {
         return super.getCode();
     }
 
-
     @Override
     public void setCode(String code) {
         super.setCode(code);
     }
 
     @Override
-    public Set<Issue> getIssues() {
-        return super.getIssues();
+    public Set<Issue> getIssueHashSet() {
+        return super.getIssueHashSet();
     }
 
     @Override
-    public void setIssues(Set<Issue> issues) {
-        super.setIssues(issues);
+    public void setIssueHashSet(Set<Issue> issueHashSet) {
+        super.setIssueHashSet(issueHashSet);
     }
 }
