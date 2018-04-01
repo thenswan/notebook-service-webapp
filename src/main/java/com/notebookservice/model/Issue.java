@@ -89,4 +89,5 @@ public class Issue {
 //    public void setTablet(Tablet device) {
 //        this.tablet = device;
 //    }
+
 }

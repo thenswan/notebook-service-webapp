@@ -6,16 +6,12 @@ import com.notebookservice.model.AbstractModels.Device;
 import javax.persistence.Entity;
 import java.util.Set;
 
-/**
- * Created by admin on 14.12.2017.
- */
-
 @Entity
-public class Mobile extends Device {
-    public Mobile() {
+public class Notebook extends Device {
+    public Notebook() {
     }
 
-    public Mobile(String manufactuer, String model, String type, String code, Set<Issue> issues) {
+    public Notebook(String manufactuer, String model, String type, String code, Set<Issue> issues) {
         super(manufactuer, model, type, code, issues);
     }
 

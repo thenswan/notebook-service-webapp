@@ -2,7 +2,7 @@ package com.notebookservice.controller;
 
 import com.notebookservice.model.AbstractModels.Device;
 import com.notebookservice.model.Issue;
-import com.notebookservice.model.Mobile;
+import com.notebookservice.model.Notebook;
 import com.notebookservice.model.User;
 import com.notebookservice.service.*;
 import com.notebookservice.validator.IssueValidator;
@@ -38,9 +38,6 @@ public class UserController {
 
     @Autowired
     private UserValidator userValidator;
-
-    @Autowired
-    private ShipService shipService;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
@@ -95,15 +92,16 @@ public class UserController {
 
         return ("redirect:/deviceInfo/"+id+"");
     }
+
     @RequestMapping(value = "/welcome", method = RequestMethod.POST)
-    public String addDevice(Model model, HttpServletRequest request, @ModelAttribute("newd") Mobile mobile) {
+    public String addDevice(Model model, HttpServletRequest request, @ModelAttribute("newd") Notebook notebook) {
 
         Set<Issue> issueSet = new HashSet<>();
-       mobile.setIssues(issueSet);
-       mobile.setType("Phone");
+       notebook.setIssues(issueSet);
+       notebook.setType("Notebook");
         User user1 = userService.findByUsername(request.getUserPrincipal().getName());
-        user1.addDevice(mobile);
-        deviceService.addDevice(mobile);
+        user1.addDevice(notebook);
+        deviceService.addDevice(notebook);
 
         return "redirect:/welcome";
     }
@@ -141,7 +139,7 @@ public class UserController {
         }
         model.addObject("listDevices", deviceList);
         model.addObject("listManuf", statistics());
-        model.addObject("newd", new Mobile());
+        model.addObject("newd", new Notebook());
         model.setViewName("welcome");
 
 
