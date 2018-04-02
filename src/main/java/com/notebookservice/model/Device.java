@@ -98,16 +98,4 @@ public abstract class Device {
         this.user = user;
     }
 
-    @Override
-    public String toString() {
-        return "Device{" +
-                "deviceId=" + deviceId +
-                ", manufacturer='" + manufacturer + '\'' +
-                ", model='" + model + '\'' +
-                ", type='" + type + '\'' +
-                ", code='" + code + '\'' +
-                ", user=" + user +
-                ", issueHashSet=" + issueHashSet +
-                '}';
-    }
 }
