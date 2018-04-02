@@ -133,7 +133,7 @@ public class UserController {
         model.addObject("listDevices", deviceList);
         model.addObject("listManufacturer", statistics());
         model.addObject("NewDevice", new Notebook());
-        model.setViewName("welcome");
+        model.setViewName("tickets");
 
         return model;
     }

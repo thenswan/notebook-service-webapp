@@ -1,7 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%--<intercept-url pattern="/deviceInfo.jsp" access="hasRole('ANONYMOUS')" />--%>
+<intercept-url pattern="/deviceInfo.jsp" access="hasRole('ANONYMOUS')" />
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
@@ -36,12 +36,12 @@
 <!-- ============================================================== -->
 <!-- Preloader - style you can find in spinners.css -->
 <!-- ============================================================== -->
-<%--<div class="preloader">--%>
-    <%--<div class="loader">--%>
-        <%--<div class="loader__figure"></div>--%>
-        <%--<p class="loader__label">Notebook service</p>--%>
-    <%--</div>--%>
-<%--</div>--%>
+<div class="preloader">
+    <div class="loader">
+        <div class="loader__figure"></div>
+        <p class="loader__label">Notebook service</p>
+    </div>
+</div>
 <!-- ============================================================== -->
 <!-- Main wrapper - style you can find in pages.scss -->
 <!-- ============================================================== -->
@@ -174,6 +174,7 @@
                                     <thead>
                                     <tr>
                                         <th>Id</th>
+                                        <th>Name</th>
                                         <th>Description</th>
                                         <th>Fixed</th>
                                         <c:choose>
@@ -187,15 +188,16 @@
                                     <c:forEach var="issue" items="${device.issueHashSet}">
                                         <tr>
                                             <td>${issue.issueId}</td>
+                                            <td>${issue.name}</td>
                                             <td>${issue.description}</td>
                                             <td>${issue.fixed}</td>
                                             <c:choose>
                                                 <c:when test="${pageContext.request.userPrincipal.name == 'admin123'}">
                                                     <td>
-                                                        <button type="button"
+                                                        <a type="button" href="/editIssue/${issue.issueId}"
                                                                 class="btn btn-sm btn-icon btn-pure btn-outline edit-row-btn"
                                                                 data-toggle="tooltip" data-original-title="Edit">
-                                                            <i class="ti-pencil" aria-hidden="true"></i></button>
+                                                            <i class="ti-pencil" aria-hidden="true"></i></a>
                                                     </td>
                                                 </c:when>
                                             </c:choose>

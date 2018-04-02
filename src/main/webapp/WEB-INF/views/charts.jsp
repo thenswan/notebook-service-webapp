@@ -32,12 +32,12 @@
 <!-- ============================================================== -->
 <!-- Preloader - style you can find in spinners.css -->
 <!-- ============================================================== -->
-<%--<div class="preloader">--%>
-<%--<div class="loader">--%>
-<%--<div class="loader__figure"></div>--%>
-<%--<p class="loader__label">Notebook service</p>--%>
-<%--</div>--%>
-<%--</div>--%>
+<div class="preloader">
+    <div class="loader">
+        <div class="loader__figure"></div>
+        <p class="loader__label">Notebook service</p>
+    </div>
+</div>
 <!-- ============================================================== -->
 <!-- Main wrapper - style you can find in pages.scss -->
 <!-- ============================================================== -->
@@ -197,7 +197,7 @@
         },
         legend: {
             data: ['# of Issues'],
-            textStyle : {
+            textStyle: {
                 color: "#ced4da"
             }
         },
@@ -214,7 +214,7 @@
         xAxis: [
             {
                 type: 'category',
-                nameTextStyle : {
+                nameTextStyle: {
                     color: "#ced4da"
                 },
                 data: [
@@ -236,7 +236,7 @@
         yAxis: [
             {
                 type: 'value',
-                nameTextStyle : {
+                nameTextStyle: {
                     color: "#ced4da"
                 }
             }
