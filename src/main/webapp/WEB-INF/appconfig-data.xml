@@ -10,12 +10,26 @@
     http://www.springframework.org/schema/tx
     http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="org.postgresql.Driver"/>
-        <property name="url" value="jdbc:postgresql:spring"/>
-        <property name="username" value="postgres"/>
-        <property name="password" value="1111"/>
+    <bean class="java.net.URI" id="dbUrl">
+        <constructor-arg value="${DATABASE_URL}"/>
     </bean>
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <!--<property name="url" value="#{ 'jdbc:postgresql://' + @dbUrl.getHost() + ':' + @dbUrl.getPort() + @dbUrl.getPath() }"/>-->
+        <property name="url" value="${DATABASE_URL}"/>
+        <!--<property name="username" value="#{ @dbUrl.getUserInfo().split(':')[0] }"/>-->
+        <property name="username" value="${jdbc.username}"/>
+        <!--<property name="password" value="#{ @dbUrl.getUserInfo().split(':')[1] }"/>-->
+        <property name="password" value="${jdbc.password}"/>
+        <property name="driverClassName" value="org.postgresql.Driver"/>
+    </bean>
+
+    <!--<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+        <!--<property name="driverClassName" value="org.postgresql.Driver"/>-->
+        <!--<property name="url" value="jdbc:postgresql:spring"/>-->
+        <!--<property name="username" value="postgres"/>-->
+        <!--<property name="password" value="1111"/>-->
+    <!--</bean>-->
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
