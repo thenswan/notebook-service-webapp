@@ -75,7 +75,7 @@
                         <a class="waves-effect waves-dark" href="/welcome"
                            aria-expanded="false"><i class="fa fa-circle-o text-success"></i><span class="hide-menu">Tickets</span></a>
                     </li>
-                    <li><a class="waves-effect waves-dark" href="/charts" aria-expanded="false"><i
+                    <li><a class="waves-effect waves-dark" href="/statistics" aria-expanded="false"><i
                             class="fa fa-circle-o text-info"></i><span class="hide-menu">Statistics</span></a></li>
                     <li><a onclick="document.forms['logoutForm'].submit()" class="waves-effect waves-dark" href="#"
                            aria-expanded="false"><i

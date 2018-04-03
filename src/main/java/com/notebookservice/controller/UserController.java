@@ -138,8 +138,8 @@ public class UserController {
         return model;
     }
 
-    @RequestMapping(value = {"/charts"}, method = RequestMethod.GET)
-    public ModelAndView charts(ModelAndView model, HttpServletRequest request) {
+    @RequestMapping(value = {"/statistics"}, method = RequestMethod.GET)
+    public ModelAndView statistics(ModelAndView model, HttpServletRequest request) {
         List<Device> deviceList;
         username = request.getUserPrincipal().getName();
         if (request.getUserPrincipal().getName().equalsIgnoreCase("admin123")) {
@@ -150,7 +150,7 @@ public class UserController {
         model.addObject("listDevices", deviceList);
         model.addObject("listManufacturer", statistics());
         model.addObject("NewDevice", new Notebook());
-        model.setViewName("charts");
+        model.setViewName("statistics");
 
         return model;
     }
